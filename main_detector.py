@@ -9,7 +9,7 @@ import time
 start_time = time.time()
 
 # Load grayscale image
-image_path = 'scratch 4.tiff'
+image_path = 'images/scratch 4.tiff'
 img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
 
 # Image dimensions
