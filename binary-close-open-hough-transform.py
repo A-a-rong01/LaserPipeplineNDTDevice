@@ -18,6 +18,9 @@ import matplotlib.pyplot as plt
 
 # Read as 8-bit grayscale
 image = cv2.imread('images/two_vertical_and_horizontal.tiff', cv2.IMREAD_GRAYSCALE)
+# image = cv2.imread('images/faint_pit.tiff', cv2.IMREAD_GRAYSCALE)
+# image = cv2.imread('images/pit.tiff', cv2.IMREAD_GRAYSCALE)
+
 
 og = image.copy()
 
