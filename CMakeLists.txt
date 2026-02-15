@@ -29,7 +29,7 @@ FetchContent_Declare(
     GIT_TAG         52eb8108c5bdec04579160ae17225d66034bd723 # release-1.17.0
 )
 
-# DO NOT USE WINDOWS SHARED RUNTIME (DLL)
+# DO NOT USE STATIC RUNTIME ON WINDOWS
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
