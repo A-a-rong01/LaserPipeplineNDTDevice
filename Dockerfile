@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     cmake \
     python3-dev \
     git \
+    libopencv-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -18,11 +19,12 @@ RUN cmake --build build --config Release
 # Setup the runtime environment
 FROM dtcooper/raspberrypi-os:bookworm AS runtime
 
-# Install runtime dependencies (python and libpython)
+# Install python and libpython as runtime dependencies
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     python3 \
     libpython3.11 \
+    python3-opencv \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a user to run the image processing software

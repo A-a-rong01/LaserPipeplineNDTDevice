@@ -36,6 +36,9 @@ FetchContent_MakeAvailable(googletest)
 # Python configuration
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 
+# OpenCV configuration
+find_package(OpenCV REQUIRED)
+
 # Core library - logic that does not contain main
 add_library(imgproc_core
     src/cpp_image_processor.cc
@@ -45,8 +48,9 @@ add_library(imgproc_core
 # Define include directories for the library
 target_include_directories(imgproc_core PUBLIC .) # root for relative imports
 
-# Link Python and Pybind to the core library
-target_link_libraries(imgproc_core PUBLIC pybind11::embed)
+# Link Python, Pybind, and OpenCV to the core library
+target_link_libraries(imgproc_core PUBLIC pybind11::embed ${OpenCV_LIBS})
+
 
 # Application
 add_executable(imgproc
