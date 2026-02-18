@@ -1,6 +1,7 @@
 #ifndef IMAGE_PROCESSOR_H_
 #define IMAGE_PROCESSOR_H_
 
+#include <opencv2/opencv.hpp>
 #include <pybind11/embed.h>
 
 namespace py = pybind11;
@@ -28,6 +29,11 @@ public:
      * TODO document destructor
      */
     virtual ~ImageProcessor() = default;
+
+    /**
+     * TODO document execute method
+     */
+    virtual cv::Mat execute(const cv::Mat &) const = 0;
 
     /**
      * TODO document name method

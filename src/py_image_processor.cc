@@ -2,14 +2,46 @@
 
 #include <iostream>
 
-std::string PyImageProcessor::getName() const
+PyImageProcessor::PyImageProcessor()
 {
+    // acquire the lock on the python gil
+    py::gil_scoped_acquire acquire;
+
+    // import the python module and functions
+    pyProcessor = py::module_::import("scripts.pyprocessor");
+    executeFunction = pyProcessor.attr("execute");
+    getNameFunction = pyProcessor.attr("get_name");
+}
+
+PyImageProcessor::~PyImageProcessor()
+{
+    // acquire the lock on the python gil
+    py::gil_scoped_acquire acquire;
+}
+
+cv::Mat PyImageProcessor::execute(const cv::Mat &image) const
+{
+    // acquire the lock on the python gil
+    py::gil_scoped_acquire acquire;
     try
     {
-        py::module_ pyProcessor = py::module_::import("scripts.pyprocessor");
-        py::object executor = pyProcessor.attr("get_name");
-        py::object resultObject = executor();
-        return resultObject.cast<std::string>();
+        return executeFunction(image).cast<cv::Mat>();
+    }
+    catch (const std::exception &e)
+    {
+        // return an empty cv mat
+        std::cerr << e.what() << '\n';
+        return cv::Mat();
+    }
+}
+
+std::string PyImageProcessor::getName() const
+{
+    // acquire the lock on the python gil
+    py::gil_scoped_acquire acquire;
+    try
+    {
+        return getNameFunction().cast<std::string>();
     }
     catch (const std::exception &e)
     {

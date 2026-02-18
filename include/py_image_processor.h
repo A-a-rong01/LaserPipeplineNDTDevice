@@ -14,6 +14,21 @@ class PyImageProcessor : public ImageProcessor
 {
 public:
     /**
+     * TODO document constructor
+     */
+    PyImageProcessor();
+
+    /**
+     * TODO document destructor
+     */
+    ~PyImageProcessor();
+
+    /**
+     * TODO document execute method
+     */
+    cv::Mat execute(const cv::Mat &) const override;
+
+    /**
      * TODO document name method
      */
     std::string getName() const override;
@@ -23,6 +38,21 @@ private:
      * TODO document guard
      */
     py::scoped_interpreter guard;
+
+    /**
+     * TODO document module
+     */
+    py::module_ pyProcessor;
+
+    /**
+     * TODO document function
+     */
+    py::object executeFunction;
+
+    /**
+     * TODO document function
+     */
+    py::object getNameFunction;
 };
 
 #endif

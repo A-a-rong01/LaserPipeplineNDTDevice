@@ -28,19 +28,7 @@ int main(int argc, char *argv[])
         return EXIT_SUCCESS;
     }
     
-    // turn the arguments into a vector of strings
-    // std::vector<std::string> args(argv + 1, argv + argc);
-
     ImageProcessor *processor = nullptr;
-    // if (std::find(args.begin(), args.end(), "--python") != args.end())
-    // {
-    //     processor = new PyImageProcessor;
-    // }
-    // else
-    // {
-    //     processor = new CppImageProcessor;
-    // }
-
     if(result["python"].as<bool>())
     {
         processor = new PyImageProcessor;

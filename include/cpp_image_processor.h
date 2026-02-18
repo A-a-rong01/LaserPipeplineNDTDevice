@@ -10,6 +10,11 @@ class CppImageProcessor : public ImageProcessor
 {
 public:
     /**
+     * TODO document execute method
+     */
+    cv::Mat execute(const cv::Mat &) const override;
+
+    /**
      * TODO document name method
      */
     std::string getName() const override;
