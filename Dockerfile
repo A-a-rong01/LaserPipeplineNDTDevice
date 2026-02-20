@@ -38,6 +38,9 @@ WORKDIR /home/imgproc
 # Copy the build into the runtime environment
 COPY --from=build /app/build/imgproc ./bin/imgproc
 
+# Copy test images into the runtime environment
+COPY --from=build /app/images ./images
+
 # TODO check if this actually works on the RPi; maybe change to dynamically detect Python3
 COPY scripts/ /usr/local/lib/python3.11/dist-packages/scripts
 
@@ -46,4 +49,5 @@ RUN touch /usr/local/lib/python3.11/dist-packages/scripts/__init__.py
 
 # Switch to imgproc user and run
 USER imgproc
-ENTRYPOINT [ "/home/imgproc/bin/imgproc" ]
+WORKDIR /home/imgproc
+ENTRYPOINT [ "bin/imgproc" ]
