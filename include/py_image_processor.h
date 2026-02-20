@@ -21,7 +21,7 @@ public:
     /**
      * TODO document destructor
      */
-    ~PyImageProcessor();
+    ~PyImageProcessor() override;
 
     /**
      * TODO document execute method

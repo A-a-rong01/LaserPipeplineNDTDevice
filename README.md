@@ -28,7 +28,7 @@ Unfortunately, this project doesn't support builds for Windows or MacOS at the t
 > - Ninja
 
 ```bash
-cmake -B build -S .
+cmake -B build -S . -DPython3_EXECUTABLE=$(pwd)/.venv/bin/python
 cmake --build build 
 ```
 

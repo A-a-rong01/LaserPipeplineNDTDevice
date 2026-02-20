@@ -1,3 +1,4 @@
+#include "include/cvmat_caster.hpp"
 #include "include/py_image_processor.h"
 
 #include <iostream>
