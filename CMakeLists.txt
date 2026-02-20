@@ -35,6 +35,7 @@ FetchContent_MakeAvailable(googletest)
 
 # Python configuration
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+message(STATUS "CMake found Python at: ${Python3_EXECUTABLE}")
 
 # OpenCV configuration
 find_package(OpenCV REQUIRED)
@@ -50,7 +51,6 @@ target_include_directories(imgproc_core PUBLIC .) # root for relative imports
 
 # Link Python, Pybind, and OpenCV to the core library
 target_link_libraries(imgproc_core PUBLIC pybind11::embed ${OpenCV_LIBS})
-
 
 # Application
 add_executable(imgproc
@@ -78,11 +78,8 @@ gtest_discover_tests(unit_tests)
 # install the main binary
 install(TARGETS imgproc DESTINATION bin)
 
+# determine the python version for the installation path
+set(PYTHON_INSTALL_DIR "lib/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR}/site-packages")
 
-execute_process(
-    COMMAND ${Python3_EXECUTABLE} -c "import site; print(site.getsitepackages()[0])"
-    OUTPUT_VARIABLE PYTHON_SITE_PACKAGES
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-
-install(DIRECTORY scripts DESTINATION ${PYTHON_SITE_PACKAGES})
+# install scripts to the relative path
+install(DIRECTORY scripts DESTINATION ${PYTHON_INSTALL_DIR})
